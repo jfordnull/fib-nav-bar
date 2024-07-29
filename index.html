@@ -13,8 +13,14 @@
         <div class="nav-item yellow" data-index="2"><div>projects</div></div>
         <div class="nav-item black" data-index="3"><div>contact</div></div>
     </div>
+    <section id="home">home</section>
+    <section id="about">about</section>
+    <section id="projects">projects</section>
+    <section id="contact">contact</section>
     <script>
         const navItems = document.querySelector('.nav').children;
+        let currentSection = 0;
+        let currentNavSelected = 0;
         
         // Fibonacci ratios
         const navSizes = [
@@ -29,17 +35,22 @@
             [3,1,0,2],
             [3,2,1,0]
         ]
+
+        function resetNav(selected){
+            const i = parseInt(selected.getAttribute('data-index'),10);
+            currentNavSelected = i;
+            Array.from(navItems).forEach((element, j)=>{
+                element.style.height = element.style.width = navSizes[sizeAssignments[i][j]];
+            })
+            selected.firstElementChild.style.visibility = 'visible';
+            Array.from(navItems).forEach(element=>{
+                if(element!=selected) element.firstElementChild.style.visibility = 'hidden';
+            })
+        }
         
         Array.from(navItems).forEach(item=>{
             item.addEventListener('mouseover',()=>{
-                const i = parseInt(item.getAttribute('data-index'),10);
-                Array.from(navItems).forEach((element, j)=>{
-                    element.style.height = element.style.width = navSizes[sizeAssignments[i][j]];
-                })
-                item.firstElementChild.style.visibility = 'visible';
-                Array.from(navItems).forEach(element=>{
-                    if(element!==item) element.firstElementChild.style.visibility = 'hidden';
-                })
+                resetNav(item);
             })
         })
     </script>

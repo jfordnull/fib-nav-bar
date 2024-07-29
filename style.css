@@ -1,12 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Julius+Sans+One&family=Silkscreen:wght@400;700&family=Tiny5&display=swap');
 
 body {
-    height: 100%;
-    display:flex;
-    align-items: center;
+    font-size: 16pt;
+    margin: 0;
+}
+
+section{
+    height: 100vh;
+    width: 100%;
+    display: flex;
     justify-content: center;
-    background-color: gray;
-    font-size: 30pt;
+    align-items: center;
+}
+
+#home{
+    background-color: white;
+}
+
+#about{
+    background-color: purple;
+}
+
+#projects{
+    background-color: white;
+}
+
+#contact{
+    background-color: purple;
+}
+
+/* For 1920x1080, we want nav 72px margin*/
+.nav{
+    position: fixed;
+    /* 72/1080 */
+    top: 6.66%;
+    /* 72/1920 */
+    right: 3.75%;
 }
 
 .nav-item{
