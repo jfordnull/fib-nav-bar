@@ -8,19 +8,29 @@
 </head>
 <body>
     <div class="nav">
-        <div class="nav-item blue" data-index="0"><div>home</div></div>
-        <div class="nav-item red" data-index="1"><div>about</div></div>
-        <div class="nav-item yellow" data-index="2"><div>projects</div></div>
-        <div class="nav-item black" data-index="3"><div>contact</div></div>
+        <div class="nav-item blue" data-index="0" data-id="home">
+            <a href="#home" class="smooth-scroll"><div>home</div></a>
+        </div>
+        <div class="nav-item red" data-index="1" data-id="about">
+            <a href="#about" class="smooth-scroll"><div>about</div></a>
+        </div>
+        <div class="nav-item yellow" data-index="2" data-id="projects">
+            <a href="#projects" class="smooth-scroll"><div>projects</div></a>
+        </div>
+        <div class="nav-item black" data-index="3" data-id="contact">
+            <a href="#contact" class="smooth-scroll"><div>contact</div></a>
+        </div>
     </div>
-    <section id="home">home</section>
-    <section id="about">about</section>
-    <section id="projects">projects</section>
-    <section id="contact">contact</section>
+    <section id="home" class="blue">home</section>
+    <section id="about" class="red">about</section>
+    <section id="projects" class="yellow">projects</section>
+    <section id="contact" class="black">contact</section>
     <script>
         const navItems = document.querySelector('.nav').children;
+        const sections = document.querySelectorAll('section');
         let currentSection = 0;
         let currentNavSelected = 0;
+        let autoScrolling = false;
         
         // Fibonacci ratios
         const navSizes = [
@@ -39,20 +49,38 @@
         function resetNav(selected){
             const i = parseInt(selected.getAttribute('data-index'),10);
             currentNavSelected = i;
-            Array.from(navItems).forEach((element, j)=>{
-                element.style.height = element.style.width = navSizes[sizeAssignments[i][j]];
+            Array.from(navItems).forEach((item, j)=>{
+                item.style.height = item.style.width = navSizes[sizeAssignments[i][j]];
             })
             selected.firstElementChild.style.visibility = 'visible';
-            Array.from(navItems).forEach(element=>{
-                if(element!=selected) element.firstElementChild.style.visibility = 'hidden';
+            Array.from(navItems).forEach(item=>{
+                if(item!=selected) item.firstElementChild.style.visibility = 'hidden';
             })
+            console.log("Reset nav!");
         }
         
         Array.from(navItems).forEach(item=>{
             item.addEventListener('mouseover',()=>{
                 resetNav(item);
             })
+            item.addEventListener('click',()=>{
+                autoScrolling = true;
+                setTimeout(()=>autoScrolling=false,750);
+            })
         })
+
+        window.onscroll = () => {
+            if (autoScrolling) return;
+            let current = '';
+            sections.forEach(section=>{
+                if (pageYOffset >= section.offsetTop - 75) current = section.getAttribute('id');
+                Array.from(navItems).forEach(item=>{
+                    if(item.getAttribute('data-id')==current) resetNav(item);
+                })
+            })
+        }
+
+        resetNav(Array.from(navItems)[0]);
     </script>
 </body>
 </html>
