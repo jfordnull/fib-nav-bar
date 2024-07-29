@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Julius+Sans+One&family=Silkscreen:wght@400;700&family=Tiny5&display=swap');
+
+body {
+    height: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+    font-size: 30pt;
+}
+
+.nav-item{
+    color: white;
+    font-family: "Inconsolata";
+    text-align: center;
+    align-content: center;
+    height: 10px;
+    width: 10px;
+}
+
+.nav-item > * {
+    visibility: hidden;
+}
+
+.red{
+    background-color: #e01b50;
+}
+
+.blue{
+    background-color: #54b3cb;
+}
+
+.yellow{
+    background-color: #f9c22e;
+}
+
+.black{
+    background-color: black;
+}

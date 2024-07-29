@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>sidebar</title>
+</head>
+<body>
+    <div class="nav">
+        <div class="nav-item blue" data-index="0"><div>home</div></div>
+        <div class="nav-item red" data-index="1"><div>about</div></div>
+        <div class="nav-item yellow" data-index="2"><div>projects</div></div>
+        <div class="nav-item black" data-index="3"><div>contact</div></div>
+    </div>
+    <script>
+        const navItems = document.querySelector('.nav').children;
+        
+        // Fibonacci ratios
+        const navSizes = [
+            '5em',
+            `${5/1.6}em`,
+            `${5/1.6**2}em`,
+            `${5/1.6**3}em`
+        ]
+        const sizeAssignments = [
+            [0,1,2,3],
+            [2,0,1,3],
+            [3,1,0,2],
+            [3,2,1,0]
+        ]
+        
+        Array.from(navItems).forEach(item=>{
+            item.addEventListener('mouseover',()=>{
+                const i = parseInt(item.getAttribute('data-index'),10);
+                Array.from(navItems).forEach((element, j)=>{
+                    element.style.height = element.style.width = navSizes[sizeAssignments[i][j]];
+                })
+                item.firstElementChild.style.visibility = 'visible';
+                Array.from(navItems).forEach(element=>{
+                    if(element!==item) element.firstElementChild.style.visibility = 'hidden';
+                })
+            })
+        })
+    </script>
+</body>
+</html>
